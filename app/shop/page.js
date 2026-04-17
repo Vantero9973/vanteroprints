@@ -1,0 +1,87 @@
+import Link from "next/link";
+import Image from "next/image";
+import { getAllProducts, formatPrice } from "@/lib/shopify";
+
+export const metadata = {
+  title: "Shop",
+  description:
+    "Original hand-pulled mokuhanga prints and giclée reproductions.",
+};
+
+export default async function ShopPage() {
+  let products = [];
+  try {
+    products = await getAllProducts();
+  } catch {
+    // Shopify not yet connected
+  }
+
+  return (
+    <div className="pt-[calc(72px+4rem)] pb-32">
+      <div className="max-w-site mx-auto px-6 lg:px-16">
+        <header className="flex flex-col gap-4 mb-20 max-w-lg">
+          <span className="text-xs font-medium tracking-widest uppercase text-accent">
+            Shop
+          </span>
+          <h1 className="font-display text-5xl lg:text-6xl font-normal tracking-tight">
+            Prints
+          </h1>
+          <p className="text-base text-text-secondary leading-loose">
+            Each original is hand-carved and hand-pulled on Nishinouchi washi.
+            No two prints are identical.
+          </p>
+        </header>
+
+        {products.length === 0 ? (
+          <p className="text-text-muted text-sm py-16">Prints coming soon.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+            {products.map((product) => {
+              const image = product.images?.edges?.[0]?.node;
+              const prices = product.variants?.edges
+                ?.map((e) => parseFloat(e.node.price.amount))
+                .sort((a, b) => a - b);
+              const currency =
+                product.variants?.edges?.[0]?.node.price.currencyCode;
+
+              return (
+                <Link
+                  key={product.id}
+                  href={`/shop/${product.handle}`}
+                  className="group border border-white/5 rounded-sm overflow-hidden hover:border-white/10 transition-colors"
+                >
+                  <div className="aspect-[5/7] relative bg-ink-soft">
+                    {image ? (
+                      <Image
+                        src={image.url}
+                        alt={image.altText || product.title}
+                        fill
+                        className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="font-display text-5xl text-text-muted opacity-10">
+                          版
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex justify-between items-baseline p-5 border-t border-white/5">
+                    <span className="font-display text-base text-text-primary">
+                      {product.title}
+                    </span>
+                    {prices?.[0] && currency && (
+                      <span className="text-sm text-accent">
+                        from {formatPrice(prices[0], currency)}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

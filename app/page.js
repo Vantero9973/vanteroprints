@@ -1,65 +1,88 @@
+import Link from "next/link";
 import Image from "next/image";
+import { getAllProducts } from "@/lib/shopify";
 
-export default function Home() {
+export default async function HomePage() {
+  let featured = null;
+  try {
+    const products = await getAllProducts();
+    featured =
+      products.find((p) => p.tags.includes("featured")) || products[0] || null;
+  } catch (err) {
+    console.error("Shopify error:", err);
+  }
+
+  const heroImage = featured?.images?.edges?.[0]?.node;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
+    <section className="pt-[72px] flex items-start relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-3/5 h-full bg-gradient-radial from-accent/5 via-transparent to-transparent pointer-events-none" />
+
+      <div className="max-w-site mx-auto px-6 lg:px-16 py-12 grid grid-cols-1 md:grid-cols-[1fr_480px] gap-12 lg:gap-20 items-start w-full">
+        {/* Copy */}
+        <div className="flex flex-col gap-6 pt-8 md:pt-16 md:sticky md:top-24">
+          <span className="text-xs font-medium tracking-widest uppercase text-accent">
+            Mokuhanga · 木版画
+          </span>
+          <h1 className="font-display text-4xl lg:text-6xl font-normal leading-none tracking-tight">
+            Hand-carved
+            <br />
+            woodblock
+            <br />
+            prints
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-base text-text-secondary max-w-sm leading-loose">
+            Traditional Japanese mokuhanga, made in Chicago. Each print
+            hand-carved and hand-pulled on washi paper.
           </p>
+          <div className="flex gap-4 flex-wrap mt-2">
+            <Link
+              href="/shop"
+              className="bg-accent text-ink text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm hover:opacity-85 transition-opacity"
+            >
+              View prints
+            </Link>
+            <Link
+              href="/about"
+              className="border border-white/10 text-text-secondary text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm hover:border-white/20 hover:text-text-primary transition-colors"
+            >
+              The process
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Image */}
+        <div className="flex flex-col gap-3">
+          <div className="aspect-[5/7] relative bg-ink-soft border border-white/5 rounded-sm overflow-hidden w-full">
+            {heroImage ? (
+              <Image
+                src={heroImage.url}
+                alt={heroImage.altText || "Print"}
+                fill
+                className="object-cover"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="font-display text-7xl text-text-muted opacity-15">
+                  夜桜
+                </span>
+              </div>
+            )}
+          </div>
+          <div className="flex justify-between text-xs text-text-muted tracking-wide">
+            <span>{featured?.title || "Midnight Sakura — Yozakura 夜桜"}</span>
+            <span>Mokuhanga · 7 blocks · 2026</span>
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+
+      <span
+        className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 rotate-90 font-display text-xs tracking-[0.3em] text-text-muted opacity-15 whitespace-nowrap"
+        aria-hidden
+      >
+        木版画
+      </span>
+    </section>
   );
 }
