@@ -35,18 +35,12 @@ export default async function HomePage() {
             Traditional Japanese mokuhanga, made in Chicago. Each print
             hand-carved and hand-pulled on washi paper.
           </p>
-          <div className="flex gap-4 flex-wrap mt-2">
+          <div className="mt-2">
             <Link
               href="/shop"
-              className="bg-accent text-ink text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm hover:opacity-85 transition-opacity"
-            >
-              View prints
-            </Link>
-            <Link
-              href="/about"
               className="border border-white/10 text-text-secondary text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm hover:border-white/20 hover:text-text-primary transition-colors"
             >
-              The process
+              View prints
             </Link>
           </div>
         </div>
