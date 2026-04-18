@@ -57,7 +57,7 @@ export default function Footer() {
             ))}
           </div>
           <p className="text-xs text-text-muted">
-            © {new Date().getFullYear()} Vantero Prints
+            © {new Date().getFullYear()} vanteroprints
           </p>
         </div>
       </div>
