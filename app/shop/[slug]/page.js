@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { getProduct, getAllProducts, formatPrice } from "@/lib/shopify";
-import AddToCartButton from "@/components/AddToCartButton";
+import VariantSelector from "@/components/VariantSelector";
 
 export async function generateStaticParams() {
   try {
@@ -93,31 +93,7 @@ export default async function ProductPage({ params }) {
               {product.description}
             </p>
 
-            {/* Variants */}
-            <div className="flex flex-col gap-4">
-              {variants.map((variant) => (
-                <div
-                  key={variant.id}
-                  className="border border-white/5 p-5 rounded-sm hover:border-white/10 transition-colors"
-                >
-                  <div className="flex justify-between items-baseline mb-4">
-                    <span className="text-sm text-text-primary">
-                      {variant.title}
-                    </span>
-                    <span className="font-display text-2xl text-accent">
-                      {formatPrice(
-                        variant.price.amount,
-                        variant.price.currencyCode
-                      )}
-                    </span>
-                  </div>
-                  <AddToCartButton
-                    variantId={variant.id}
-                    available={variant.availableForSale}
-                  />
-                </div>
-              ))}
-            </div>
+            <VariantSelector variants={variants} />
 
             {/* Shipping info */}
             <div className="flex flex-col gap-2 pt-4 border-t border-white/5">
