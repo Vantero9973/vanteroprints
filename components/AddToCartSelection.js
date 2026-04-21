@@ -1,22 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/lib/shopify";
 
 export default function AddToCartSection({ variant }) {
-  const { addToCart, removeFromCart, updateQuantity, lineItems, loading } =
-    useCart();
+  const { addToCart, updateQuantity, lineItems, loading } = useCart();
+  const [selectedQty, setSelectedQty] = useState(1);
 
   const lineItem = lineItems.find((line) => line.merchandise.id === variant.id);
   const quantityInCart = lineItem?.quantity || 0;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
+      {/* Price */}
       <div className="flex justify-between items-baseline py-4 border-y border-white/5">
-        <span className="text-sm tracking-widest uppercase text-text-muted">
+        <span className="text-xs tracking-widest uppercase text-text-muted">
           Price
         </span>
-        <span className="font-display text-2xl text-accent">
+        <span className="font-display text-3xl text-accent">
           {formatPrice(variant.price.amount, variant.price.currencyCode)}
         </span>
       </div>
@@ -28,38 +30,49 @@ export default function AddToCartSection({ variant }) {
         >
           Sold out
         </button>
-      ) : quantityInCart === 0 ? (
-        <button
-          onClick={() => addToCart(variant.id)}
-          disabled={loading}
-          className="w-full bg-accent text-ink text-xs font-medium tracking-widest uppercase py-4 rounded-sm hover:opacity-85 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {loading ? "Adding..." : "Add to cart"}
-        </button>
       ) : (
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-stretch gap-2">
+            {/* Quantity */}
+            <div className="flex items-center border border-white/10 rounded-sm px-1">
+              <button
+                onClick={() => setSelectedQty((q) => Math.max(1, q - 1))}
+                className="w-7 h-full text-text-muted hover:text-text-primary transition-colors flex items-center justify-center"
+              >
+                −
+              </button>
+              <span className="text-sm text-text-primary w-5 text-center">
+                {selectedQty}
+              </span>
+              <button
+                onClick={() => setSelectedQty((q) => q + 1)}
+                className="w-7 h-full text-text-muted hover:text-text-primary transition-colors flex items-center justify-center"
+              >
+                +
+              </button>
+            </div>
+
+            {/* Add to cart */}
             <button
-              onClick={() => updateQuantity(lineItem.id, quantityInCart - 1)}
+              onClick={() => {
+                if (quantityInCart > 0) {
+                  updateQuantity(lineItem.id, quantityInCart + selectedQty);
+                } else {
+                  addToCart(variant.id, selectedQty);
+                }
+              }}
               disabled={loading}
-              className="w-8 h-8 border border-white/10 text-text-muted hover:text-text-primary hover:border-white/20 transition-colors rounded-sm flex items-center justify-center disabled:opacity-50"
+              className="flex-1 bg-[#c0392b] text-white text-xs font-medium tracking-widest uppercase py-4 rounded-sm hover:bg-[#a93226] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              −
-            </button>
-            <span className="text-sm text-text-primary w-4 text-center">
-              {quantityInCart}
-            </span>
-            <button
-              onClick={() => updateQuantity(lineItem.id, quantityInCart + 1)}
-              disabled={loading}
-              className="w-8 h-8 border border-white/10 text-text-muted hover:text-text-primary hover:border-white/20 transition-colors rounded-sm flex items-center justify-center disabled:opacity-50"
-            >
-              +
+              {loading ? "Adding..." : "Add to cart"}
             </button>
           </div>
-          <span className="text-sm text-text-muted">
-            {quantityInCart} in cart
-          </span>
+
+          {quantityInCart > 0 && (
+            <p className="text-xs text-text-muted tracking-wide text-center">
+              {quantityInCart} already in cart
+            </p>
+          )}
         </div>
       )}
     </div>

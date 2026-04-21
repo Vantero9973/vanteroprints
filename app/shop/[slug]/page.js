@@ -39,9 +39,9 @@ export default async function ProductPage({ params }) {
   return (
     <div className="pt-[122px] pb-32">
       <div className="max-w-site mx-auto px-6 lg:px-16 py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-16 lg:gap-24 items-start">
           {/* Images */}
-          <div className="flex flex-col gap-3 md:sticky md:top-40 pr-10">
+          <div className="flex flex-col gap-3 xl:col-span-2 md:sticky md:top-40">
             <div className="aspect-[5/7] relative bg-ink-soft border border-[20px] border-white rounded-sm overflow-hidden">
               {mainImage ? (
                 <Image
@@ -79,7 +79,7 @@ export default async function ProductPage({ params }) {
           </div>
 
           {/* Details */}
-          <div className="flex flex-col gap-8 pt-2">
+          <div className="flex flex-col gap-8 xl:col-span-3 pt-2">
             <div className="flex flex-col gap-2">
               <span className="text-xs font-medium tracking-widest uppercase text-accent">
                 Mokuhanga
@@ -89,12 +89,12 @@ export default async function ProductPage({ params }) {
               </h1>
             </div>
 
+            <AddToCartSection variant={variants[0]} />
+
             <div
-              className="text-base text-text-secondary leading-loose flex flex-col gap-4 [&>p]:leading-loose"
+              className="product-description text-base text-text-secondary leading-loose flex flex-col gap-4 [&>p]:leading-loose"
               dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
             />
-
-            <AddToCartSection variant={variants[0]} />
 
             {/* Shipping info */}
             <div className="flex flex-col gap-2 pt-4 border-t border-white/5">

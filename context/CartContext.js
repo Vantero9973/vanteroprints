@@ -43,13 +43,13 @@ export function CartProvider({ children }) {
     initCart();
   }, []);
 
-  const addToCart = useCallback(async (merchandiseId) => {
+  const addToCart = useCallback(async (merchandiseId, quantity = 1) => {
     setLoading(true);
     try {
       const updatedCart = await cartApi({
         action: "add",
         merchandiseId,
-        quantity: 1,
+        quantity,
       });
       setCart(updatedCart);
       setOpen(true);
