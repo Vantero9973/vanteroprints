@@ -15,10 +15,10 @@ export default async function HomePage() {
   const heroImage = featured?.images?.edges?.[0]?.node;
 
   return (
-    <section className="pt-[96px] flex items-start relative overflow-hidden">
+    <section className="pt-[122px] flex items-start relative overflow-hidden">
       <div className="absolute top-0 right-0 w-3/5 h-full bg-gradient-radial from-accent/5 via-transparent to-transparent pointer-events-none" />
 
-      <div className="max-w-site mx-auto px-6 lg:px-16 py-12 grid grid-cols-1 md:grid-cols-[1fr_320px] lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_500px] gap-12 lg:gap-20 items-center w-full">
+      <div className="max-w-site mx-auto px-6 lg:px-16 py-24 grid grid-cols-1 md:grid-cols-[1fr_320px] lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_420px] gap-12 lg:gap-20 items-center w-full">
         {/* Copy */}
         <div className="flex flex-col gap-6">
           <span className="text-base font-medium tracking-widest uppercase text-accent">
@@ -45,7 +45,7 @@ export default async function HomePage() {
 
         {/* Image */}
         <div className="flex flex-col gap-3">
-          <div className="aspect-[5/7] relative bg-[#f5f4dc] border border-[20px] border-white/5 rounded-sm overflow-hidden w-full">
+          <div className="aspect-[5/7] relative bg-[#f5f4dc] border border-[20px] border-white rounded-sm overflow-hidden w-full">
             {heroImage ? (
               <Image
                 src={heroImage.url}

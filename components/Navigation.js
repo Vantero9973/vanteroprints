@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
+import Banner from "@/components/Banner";
 
 const links = [
   { href: "/shop", label: "Shop" },
@@ -72,127 +73,121 @@ function CartButton() {
 
 export default function Nav() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 h-[96px] transition-all duration-300 bg-black border-b ${
-        scrolled ? "border-white/10" : "border-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-6 lg:px-16 h-full flex items-center justify-between">
-        <Link href="/" className="flex items-baseline gap-2">
-          <span className="font-display text-4xl text-text-primary tracking-wider">
-            vanteroprints
-          </span>
-        </Link>
+    <nav className="fixed top-0 left-0 right-0 z-50">
+      <Banner />
+      <div className="py-5 transition-all duration-300 bg-black border-b border-white/10">
+        <div className="container mx-auto px-6 lg:px-16 h-full flex items-center justify-between">
+          <Link href="/" className="flex items-baseline gap-2">
+            <span className="font-display text-4xl text-text-primary tracking-wider">
+              vanteroprints
+            </span>
+          </Link>
 
-        {/* Desktop links + socials + cart */}
-        <div className="hidden md:flex items-center gap-10">
-          <ul className="flex gap-10 list-none">
-            {links.map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className={`text-sm tracking-widest uppercase transition-colors relative group ${
-                    pathname === l.href
-                      ? "text-text-primary"
-                      : "text-text-secondary hover:text-text-primary"
-                  }`}
-                >
-                  {l.label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-200 ${
-                      pathname === l.href ? "w-full" : "w-0 group-hover:w-full"
+          {/* Desktop links + socials + cart */}
+          <div className="hidden md:flex items-center gap-10">
+            <ul className="flex gap-10 list-none">
+              {links.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className={`text-sm tracking-widest uppercase transition-colors relative group ${
+                      pathname === l.href
+                        ? "text-text-primary"
+                        : "text-text-secondary hover:text-text-primary"
                     }`}
-                  />
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  >
+                    {l.label}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-200 ${
+                        pathname === l.href
+                          ? "w-full"
+                          : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-          <div className="flex items-center gap-4 border-l border-white/10 pl-10">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                className="text-text-muted hover:text-text-primary transition-colors"
-              >
-                {s.icon}
-              </a>
-            ))}
-            <div className="border-l border-white/10 pl-4">
-              <CartButton />
+            <div className="flex items-center gap-4 border-l border-white/10 pl-10">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="text-text-muted hover:text-text-primary transition-colors"
+                >
+                  {s.icon}
+                </a>
+              ))}
+              <div className="border-l border-white/10 pl-4">
+                <CartButton />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Mobile right side — cart + burger */}
-        <div className="md:hidden flex items-center gap-4">
-          <CartButton />
-          <button
-            className="flex flex-col gap-1.5 p-1"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            <span
-              className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
-                open ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`block w-5 h-px bg-text-primary transition-opacity duration-200 ${
-                open ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
-                open ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-ink border-t border-white/5 px-6 py-6 flex flex-col gap-5">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="font-display text-xl text-text-secondary"
-              onClick={() => setOpen(false)}
+          {/* Mobile right side — cart + burger */}
+          <div className="md:hidden flex items-center gap-4">
+            <CartButton />
+            <button
+              className="flex flex-col gap-1.5 p-1"
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle menu"
             >
-              {l.label}
-            </Link>
-          ))}
-          <div className="flex gap-5 pt-2 border-t border-white/5">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                className="text-text-muted hover:text-text-primary transition-colors"
-              >
-                {s.icon}
-              </a>
-            ))}
+              <span
+                className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
+                  open ? "rotate-45 translate-y-2" : ""
+                }`}
+              />
+              <span
+                className={`block w-5 h-px bg-text-primary transition-opacity duration-200 ${
+                  open ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
+                  open ? "-rotate-45 -translate-y-2" : ""
+                }`}
+              />
+            </button>
           </div>
         </div>
-      )}
+
+        {/* Mobile menu */}
+        {open && (
+          <div className="md:hidden bg-ink border-t border-white/5 px-6 py-6 flex flex-col gap-5">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="font-display text-xl text-text-secondary"
+                onClick={() => setOpen(false)}
+              >
+                {l.label}
+              </Link>
+            ))}
+            <div className="flex gap-5 pt-2 border-t border-white/5">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="text-text-muted hover:text-text-primary transition-colors"
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

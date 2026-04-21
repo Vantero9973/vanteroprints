@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { getProduct, getAllProducts, formatPrice } from "@/lib/shopify";
-import VariantSelector from "@/components/VariantSelector";
+import AddToCartSection from "@/components/AddToCartSelection";
 
 export async function generateStaticParams() {
   try {
@@ -37,18 +37,18 @@ export default async function ProductPage({ params }) {
   const mainImage = images[0];
 
   return (
-    <div className="pt-[calc(72px+4rem)] pb-32">
-      <div className="max-w-site mx-auto px-6 lg:px-16">
+    <div className="pt-[122px] pb-32">
+      <div className="max-w-site mx-auto px-6 lg:px-16 py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Images */}
-          <div className="flex flex-col gap-3 md:sticky md:top-24 pr-10">
-            <div className="aspect-[5/7] relative bg-ink-soft border border-white/5 rounded-sm overflow-hidden">
+          <div className="flex flex-col gap-3 md:sticky md:top-40 pr-10">
+            <div className="aspect-[5/7] relative bg-ink-soft border border-[20px] border-white rounded-sm overflow-hidden">
               {mainImage ? (
                 <Image
                   src={mainImage.url}
                   alt={mainImage.altText || product.title}
                   fill
-                  className="object-cover"
+                  className="object-cover border border-[5px] border-[#393231] rounded-sm"
                   priority
                 />
               ) : (
@@ -89,11 +89,12 @@ export default async function ProductPage({ params }) {
               </h1>
             </div>
 
-            <p className="text-base text-text-secondary leading-loose">
-              {product.description}
-            </p>
+            <div
+              className="text-base text-text-secondary leading-loose flex flex-col gap-4 [&>p]:leading-loose"
+              dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+            />
 
-            <VariantSelector variants={variants} />
+            <AddToCartSection variant={variants[0]} />
 
             {/* Shipping info */}
             <div className="flex flex-col gap-2 pt-4 border-t border-white/5">
