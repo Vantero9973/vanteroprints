@@ -11,7 +11,7 @@ const socials = [
 
 export default function ContactPage() {
   return (
-    <div className="pt-[72px] min-h-screen flex items-center">
+    <div className="pt-[96px] min-h-screen flex items-center">
       <div className="max-w-site mx-auto px-6 lg:px-16 py-24 w-full">
         <div className="max-w-xl">
           <span className="text-xs font-medium tracking-widest uppercase text-accent block mb-6">

@@ -12,8 +12,6 @@ export default function Footer() {
             </span>
             <p className="text-sm text-text-muted leading-relaxed">
               Hand-carved Japanese woodblock prints.
-              <br />
-              Chicago, Illinois.
             </p>
           </div>
           <div>
@@ -56,7 +54,7 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <p className="text-xs text-text-muted">
+          <p className="text-xs tracking-widest text-text-muted hover:text-text-primary transition-colors">
             © {new Date().getFullYear()} vanteroprints
           </p>
         </div>

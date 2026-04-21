@@ -52,15 +52,13 @@ export default function Nav() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 h-[72px] transition-all duration-300 border-b ${
-        scrolled
-          ? "bg-ink/90 backdrop-blur-xl border-white/10"
-          : "bg-transparent border-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 h-[96px] transition-all duration-300 bg-black border-b ${
+        scrolled ? "border-white/10" : "border-transparent"
       }`}
     >
-      <div className="max-w-site mx-auto px-6 lg:px-16 h-full flex items-center justify-between">
+      <div className="container mx-auto px-6 lg:px-16 h-full flex items-center justify-between">
         <Link href="/" className="flex items-baseline gap-2">
-          <span className="font-display text-xl text-text-primary tracking-wider">
+          <span className="font-display text-4xl text-text-primary tracking-wider">
             vanteroprints
           </span>
         </Link>
@@ -72,7 +70,7 @@ export default function Nav() {
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className={`text-xs tracking-widest uppercase transition-colors relative group ${
+                  className={`text-sm tracking-widest uppercase transition-colors relative group ${
                     pathname === l.href
                       ? "text-text-primary"
                       : "text-text-secondary hover:text-text-primary"
@@ -131,7 +129,7 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-ink-soft/95 backdrop-blur-xl border-t border-white/5 px-6 py-6 flex flex-col gap-5">
+        <div className="md:hidden bg-ink border-t border-white/5 px-6 py-6 flex flex-col gap-5">
           {links.map((l) => (
             <Link
               key={l.href}

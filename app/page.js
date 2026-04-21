@@ -15,30 +15,28 @@ export default async function HomePage() {
   const heroImage = featured?.images?.edges?.[0]?.node;
 
   return (
-    <section className="pt-[72px] flex items-start relative overflow-hidden">
+    <section className="pt-[96px] flex items-start relative overflow-hidden">
       <div className="absolute top-0 right-0 w-3/5 h-full bg-gradient-radial from-accent/5 via-transparent to-transparent pointer-events-none" />
 
-      <div className="max-w-site mx-auto px-6 lg:px-16 py-12 grid grid-cols-1 md:grid-cols-[1fr_480px] gap-12 lg:gap-20 items-start w-full">
+      <div className="max-w-site mx-auto px-6 lg:px-16 py-12 grid grid-cols-1 md:grid-cols-[1fr_320px] lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_500px] gap-12 lg:gap-20 items-center w-full">
         {/* Copy */}
-        <div className="flex flex-col gap-6 pt-8 md:pt-16 md:sticky md:top-24">
-          <span className="text-xs font-medium tracking-widest uppercase text-accent">
+        <div className="flex flex-col gap-6">
+          <span className="text-base font-medium tracking-widest uppercase text-accent">
             Mokuhanga · 木版画
           </span>
-          <h1 className="font-display text-4xl lg:text-6xl font-normal leading-none tracking-tight">
+          <h1 className="font-display text-5xl lg:text-7xl font-normal leading-none tracking-tight">
             Hand-carved
             <br />
-            woodblock
-            <br />
-            prints
+            woodblock prints
           </h1>
-          <p className="text-base text-text-secondary max-w-sm leading-loose">
+          <p className="text-lg text-text-secondary max-w-lg leading-loose">
             Traditional Japanese mokuhanga, made in Chicago. Each print
             hand-carved and hand-pulled on washi paper.
           </p>
-          <div className="mt-2">
+          <div className="mt-8">
             <Link
               href="/shop"
-              className="border border-white/10 text-text-secondary text-xs font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm hover:border-white/20 hover:text-text-primary transition-colors"
+              className="border border-white/10 text-text-secondary text-base font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm hover:border-white/20 hover:text-text-primary transition-colors"
             >
               View prints
             </Link>
@@ -47,13 +45,13 @@ export default async function HomePage() {
 
         {/* Image */}
         <div className="flex flex-col gap-3">
-          <div className="aspect-[5/7] relative bg-ink-soft border border-white/5 rounded-sm overflow-hidden w-full">
+          <div className="aspect-[5/7] relative bg-[#f5f4dc] border border-[20px] border-white/5 rounded-sm overflow-hidden w-full">
             {heroImage ? (
               <Image
                 src={heroImage.url}
                 alt={heroImage.altText || "Print"}
                 fill
-                className="object-cover"
+                className="object-cover border border-[5px] border-[#393231] rounded-sm"
                 priority
               />
             ) : (
@@ -72,7 +70,7 @@ export default async function HomePage() {
       </div>
 
       <span
-        className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 rotate-90 font-display text-xs tracking-[0.3em] text-text-muted opacity-15 whitespace-nowrap"
+        className="hidden lg:block absolute right-6 top-1/2 -translate-y-1/2 rotate-90 font-display text-xs tracking-[0.3em] text-text-muted opacity-50 whitespace-nowrap"
         aria-hidden
       >
         木版画
