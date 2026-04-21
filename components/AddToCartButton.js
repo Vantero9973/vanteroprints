@@ -1,14 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { createCartWithItem } from "@/lib/shopify";
+import { useCart } from "@/context/CartContext";
 
-export default function AddToCartButton({
-  variantId,
-  available,
-  label = "Purchase",
-}) {
-  const [loading, setLoading] = useState(false);
+export default function AddToCartButton({ variantId, available }) {
+  const { addToCart, loading } = useCart();
 
   if (!available) {
     return (
@@ -21,31 +16,13 @@ export default function AddToCartButton({
     );
   }
 
-  const handleClick = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ merchandiseId: variantId, quantity: 1 }),
-      });
-      const result = await res.json();
-      if (result.cart?.checkoutUrl) {
-        window.location.href = result.cart.checkoutUrl;
-      }
-    } catch (err) {
-      console.error("Cart error:", err);
-      setLoading(false);
-    }
-  };
-
   return (
     <button
-      onClick={handleClick}
+      onClick={() => addToCart(variantId)}
       disabled={loading}
       className="w-full bg-accent text-ink text-xs font-medium tracking-widest uppercase py-4 rounded-sm hover:opacity-85 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed mt-2"
     >
-      {loading ? "Redirecting..." : label}
+      {loading ? "Adding..." : "Add to cart"}
     </button>
   );
 }

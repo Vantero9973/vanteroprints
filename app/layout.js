@@ -1,23 +1,28 @@
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CartDrawer from "@/components/CartDrawer";
+import { CartProvider } from "@/context/CartContext";
 
 export const metadata = {
   title: {
-    default: "vanteroprints",
+    default: "Vantero Prints — Mokuhanga Woodblock Prints",
     template: "%s | Vantero Prints",
   },
   description:
-    "Hand-carved, hand-pulled Japanese woodblock prints. Original mokuhanga and giclée reproductions.",
+    "Hand-carved, hand-pulled Japanese woodblock prints by Vantero. Original mokuhanga and giclée reproductions.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-ink text-text-primary font-body font-light min-h-screen container mx-auto">
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
+        <CartProvider>
+          <Navigation />
+          <CartDrawer />
+          <main>{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

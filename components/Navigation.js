@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useCart } from "@/context/CartContext";
 
 const links = [
   { href: "/shop", label: "Shop" },
@@ -39,6 +40,36 @@ const socials = [
   },
 ];
 
+function CartButton() {
+  const { itemCount, setOpen } = useCart();
+
+  return (
+    <button
+      onClick={() => setOpen(true)}
+      className="relative text-text-secondary hover:text-text-primary transition-colors"
+      aria-label="Open cart"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      >
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 01-8 0" />
+      </svg>
+      {itemCount > 0 && (
+        <span className="absolute -top-1.5 -right-1.5 bg-accent text-ink text-[10px] font-medium w-4 h-4 rounded-full flex items-center justify-center">
+          {itemCount}
+        </span>
+      )}
+    </button>
+  );
+}
+
 export default function Nav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -63,7 +94,7 @@ export default function Nav() {
           </span>
         </Link>
 
-        {/* Desktop links + socials */}
+        {/* Desktop links + socials + cart */}
         <div className="hidden md:flex items-center gap-10">
           <ul className="flex gap-10 list-none">
             {links.map((l) => (
@@ -100,31 +131,37 @@ export default function Nav() {
                 {s.icon}
               </a>
             ))}
+            <div className="border-l border-white/10 pl-4">
+              <CartButton />
+            </div>
           </div>
         </div>
 
-        {/* Mobile burger */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-1"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          <span
-            className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
-              open ? "rotate-45 translate-y-2" : ""
-            }`}
-          />
-          <span
-            className={`block w-5 h-px bg-text-primary transition-opacity duration-200 ${
-              open ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
-              open ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          />
-        </button>
+        {/* Mobile right side — cart + burger */}
+        <div className="md:hidden flex items-center gap-4">
+          <CartButton />
+          <button
+            className="flex flex-col gap-1.5 p-1"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            <span
+              className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
+                open ? "rotate-45 translate-y-2" : ""
+              }`}
+            />
+            <span
+              className={`block w-5 h-px bg-text-primary transition-opacity duration-200 ${
+                open ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
+                open ? "-rotate-45 -translate-y-2" : ""
+              }`}
+            />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
