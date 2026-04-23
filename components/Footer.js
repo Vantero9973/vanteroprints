@@ -1,5 +1,6 @@
 import Link from "next/link";
 import NewsletterForm from "./NewsletterForm";
+import socials from "@/public/icon/socials";
 
 export default function Footer() {
   return (
@@ -35,14 +36,7 @@ export default function Footer() {
             ))}
           </div>
           <div className="flex gap-6">
-            {[
-              { label: "TikTok", href: "https://tiktok.com/@vanteroprints" },
-              {
-                label: "Instagram",
-                href: "https://instagram.com/vanteroprints",
-              },
-              { label: "YouTube", href: "https://youtube.com/@vanteroprints" },
-            ].map((s) => (
+            {socials.map((s) => (
               <a
                 key={s.label}
                 href={s.href}

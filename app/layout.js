@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import { CartProvider } from "@/context/CartContext";
+import FloatingCartButton from "@/components/CartButton";
 
 export const metadata = {
   title: {
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
         <CartProvider>
           <Navigation />
           <CartDrawer />
+          <FloatingCartButton />
           <main>{children}</main>
           <Footer />
         </CartProvider>
