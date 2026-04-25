@@ -84,7 +84,7 @@ export default async function ProductPage({ params }) {
               <span className="text-xs font-medium tracking-widest uppercase text-accent">
                 Mokuhanga
               </span>
-              <h1 className="font-display text-4xl lg:text-5xl font-normal tracking-tight">
+              <h1 className="font-display text-4xl lg:text-5xl font-normal tracking-tight pt-3">
                 {product.title}
               </h1>
             </div>
