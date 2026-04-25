@@ -44,9 +44,10 @@ export default function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs tracking-widest uppercase text-text-muted hover:text-text-primary transition-colors"
+                aria-label={s.label}
+                className="text-text-muted hover:text-text-primary transition-colors"
               >
-                {s.label}
+                {s.icon}
               </a>
             ))}
           </div>
