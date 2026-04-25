@@ -70,23 +70,23 @@ export default function Nav() {
 
           {/* Mobile burger */}
           <button
-            className="md:hidden flex flex-col gap-1.5 p-1"
+            className="md:hidden flex flex-col gap-2 p-1 cursor-pointer"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
             <span
-              className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
-                open ? "rotate-45 translate-y-2" : ""
+              className={`block w-6 h-px bg-[#ededed] transition-all duration-200 ${
+                open ? "rotate-45 translate-y-[9px]" : ""
               }`}
             />
             <span
-              className={`block w-5 h-px bg-text-primary transition-opacity duration-200 ${
+              className={`block w-6 h-px bg-[#ededed] transition-opacity duration-200 ${
                 open ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`block w-5 h-px bg-text-primary transition-transform duration-200 ${
-                open ? "-rotate-45 -translate-y-2" : ""
+              className={`block w-6 h-px bg-[#ededed] transition-all duration-200 ${
+                open ? "-rotate-45 -translate-y-[9px]" : ""
               }`}
             />
           </button>

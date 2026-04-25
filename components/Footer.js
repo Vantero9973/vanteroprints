@@ -1,12 +1,13 @@
 import Link from "next/link";
-import NewsletterForm from "./NewsletterForm";
+// import NewsletterForm from "./NewsletterForm";
 import socials from "@/public/icon/socials";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 pt-16 pb-8">
+    <footer className="border-t border-white/5 py-8">
+      {/* <footer className="border-t border-white/5 pt-16 pb-8"> */}
       <div className="max-w-site mx-auto px-6 lg:px-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 pb-12 border-b border-white/5">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-16 pb-12 border-b border-white/5">
           <div>
             <span className="font-display text-base tracking-widest block mb-3">
               vanteroprints
@@ -21,9 +22,10 @@ export default function Footer() {
             </p>
             <NewsletterForm />
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-8">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          {/* <div className="flex flex-wrap items-center justify-between gap-4 pt-8"> */}
           <div className="flex gap-6">
             {["/shop", "/contact"].map((href) => (
               <Link

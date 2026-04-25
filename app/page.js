@@ -45,13 +45,13 @@ export default async function HomePage() {
 
         {/* Image */}
         <div className="flex flex-col gap-3">
-          <div className="aspect-[5/7] relative bg-[#f5f4dc] border border-[20px] border-white rounded-sm overflow-hidden w-full">
+          <div className="aspect-[5/7] relative bg-[#f5f4dc] rounded-sm overflow-hidden w-full">
             {heroImage ? (
               <Image
                 src={heroImage.url}
                 alt={heroImage.altText || "Print"}
                 fill
-                className="object-cover border border-[5px] border-[#393231] rounded-sm"
+                className="object-cover rounded-sm"
                 priority
               />
             ) : (

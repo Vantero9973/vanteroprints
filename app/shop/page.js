@@ -17,7 +17,7 @@ export default async function ShopPage() {
   }
 
   return (
-    <div className="pt-[122px] pb-32">
+    <div className="pt-[122px]">
       <div className="max-w-site mx-auto px-6 lg:px-16 py-16">
         <header className="flex flex-col gap-4 mb-16 max-w-lg">
           <span className="text-xs font-medium tracking-widest uppercase text-accent">
@@ -50,13 +50,13 @@ export default async function ShopPage() {
                   href={`/shop/${product.handle}`}
                   className="group rounded-sm overflow-hidden transition-colors"
                 >
-                  <div className="aspect-[5/7] relative border border-[20px] border-white rounded-sm">
+                  <div className="aspect-[5/7] relative rounded-sm">
                     {image ? (
                       <Image
                         src={image.url}
                         alt={image.altText || product.title}
                         fill
-                        className="object-cover group-hover:scale-[1.02] transition-transform duration-500 border border-[5px] border-[#393231] rounded-sm"
+                        className="object-cover group-hover:scale-[1.02] transition-transform duration-500 rounded-sm"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">

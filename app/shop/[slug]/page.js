@@ -37,18 +37,18 @@ export default async function ProductPage({ params }) {
   const mainImage = images[0];
 
   return (
-    <div className="pt-[122px] pb-32">
+    <div className="pt-[122px]">
       <div className="max-w-site mx-auto px-6 lg:px-16 py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-16 lg:gap-24 items-start">
           {/* Images */}
           <div className="flex flex-col gap-3 xl:col-span-2 md:sticky md:top-40">
-            <div className="aspect-[5/7] relative bg-ink-soft border border-[20px] border-white rounded-sm overflow-hidden">
+            <div className="aspect-[5/7] relative bg-ink-soft rounded-sm overflow-hidden">
               {mainImage ? (
                 <Image
                   src={mainImage.url}
                   alt={mainImage.altText || product.title}
                   fill
-                  className="object-cover border border-[5px] border-[#393231] rounded-sm"
+                  className="object-cover rounded-sm"
                   priority
                 />
               ) : (
@@ -64,7 +64,7 @@ export default async function ProductPage({ params }) {
                 {images.map((img, i) => (
                   <div
                     key={i}
-                    className="w-16 aspect-square relative border border-white/5 rounded-sm overflow-hidden"
+                    className="w-16 aspect-square relative rounded-sm overflow-hidden"
                   >
                     <Image
                       src={img.url}
@@ -102,8 +102,7 @@ export default async function ProductPage({ params }) {
                 Shipping
               </span>
               <p className="text-sm text-text-muted leading-loose">
-                Ships within 3–5 business days. Tracked and insured. Packed flat
-                in archival materials. US only — contact for international.
+                Ships within 3–5 business days. Tracked and insured.
               </p>
             </div>
           </div>

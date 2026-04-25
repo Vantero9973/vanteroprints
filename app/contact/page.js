@@ -23,16 +23,16 @@ export default function ContactPage() {
           </h1>
 
           <p className="text-base text-text-secondary leading-loose mb-12 max-w-sm">
-            Questions about a print, custom commissions, wholesale, or anything
-            else — reach out directly.
+            Questions about a print, custom commissions, or anything else -
+            reach out directly.
           </p>
 
           <a
-            href="mailto:hello@vanteroprints.com"
+            href="mailto:vanteroprints@gmail.com"
             className="group inline-flex items-center gap-3 text-text-primary hover:text-accent transition-colors"
           >
             <span className="font-display text-xl lg:text-2xl tracking-wide">
-              hello@vanteroprints.com
+              vanteroprints@gmail.com
             </span>
             <span className="text-text-muted group-hover:text-accent transition-colors text-lg">
               →
