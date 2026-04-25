@@ -7,86 +7,81 @@ import {
 } from "@/lib/shopify";
 import { cookies } from "next/headers";
 
-const CART_COOKIE = "vantero_cart_id";
+export const dynamic = "force-dynamic";
 
-const cookieOptions = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "lax",
-  path: "/",
-  domain:
-    process.env.NODE_ENV === "production" ? ".vanteroprints.com" : undefined,
-  maxAge: 60 * 60 * 24 * 7, // 7 days
-};
+const CART_COOKIE = "vantero_cart_id";
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+
+function cartCookieHeader(cartId) {
+  const isProduction = process.env.NODE_ENV === "production";
+  const parts = [
+    `${CART_COOKIE}=${cartId}`,
+    `Max-Age=${COOKIE_MAX_AGE}`,
+    `Path=/`,
+    `SameSite=Lax`,
+  ];
+  if (isProduction) parts.push("Secure");
+  if (isProduction) parts.push("Domain=.vanteroprints.com");
+  return parts.join("; ");
+}
+
+function clearCookieHeader() {
+  return `${CART_COOKIE}=; Max-Age=0; Path=/`;
+}
 
 export async function POST(req) {
   const cookieStore = await cookies();
   const { action, merchandiseId, quantity, lineIds, lineId } = await req.json();
 
   try {
-    // Get or validate existing cart
     let cartId = cookieStore.get(CART_COOKIE)?.value;
     let cart = null;
 
     if (cartId) {
       cart = await getCart(cartId);
-      // If cart is null, it was completed or expired — will create fresh below
     }
 
     if (action === "get") {
-      // Return current cart state (null if none or completed)
-      return Response.json(cart, {
-        headers: cart
-          ? {}
-          : {
-              "Set-Cookie": `${CART_COOKIE}=; Max-Age=0; Path=/`,
-            },
-      });
+      if (!cart) {
+        return Response.json(null, {
+          headers: { "Set-Cookie": clearCookieHeader() },
+        });
+      }
+      return Response.json(cart);
     }
 
     if (action === "add") {
       if (!cart) {
-        // No valid cart — create one
         cart = await createCart();
-        const res = await addToCart(cart.id, merchandiseId, quantity || 1);
-        cart = res;
+        cart = await addToCart(cart.id, merchandiseId, quantity || 1);
       } else {
         cart = await addToCart(cart.id, merchandiseId, quantity || 1);
       }
-
-      const response = Response.json(cart);
-      response.headers.append(
-        "Set-Cookie",
-        `${CART_COOKIE}=${cart.id}; Max-Age=${
-          cookieOptions.maxAge
-        }; Path=/; SameSite=Lax${cookieOptions.secure ? "; Secure" : ""}${
-          cookieOptions.domain ? `; Domain=${cookieOptions.domain}` : ""
-        }`
-      );
-      return response;
+      return Response.json(cart, {
+        headers: { "Set-Cookie": cartCookieHeader(cart.id) },
+      });
     }
 
     if (action === "remove") {
       if (!cart) return Response.json(null);
       cart = await removeFromCart(cart.id, lineIds);
-
-      // If cart is now empty clear the cookie
       const remaining = cart?.lines?.edges?.length || 0;
       if (remaining === 0) {
-        const response = Response.json(null);
-        response.headers.append(
-          "Set-Cookie",
-          `${CART_COOKIE}=; Max-Age=0; Path=/`
-        );
-        return response;
+        return Response.json(null, {
+          headers: { "Set-Cookie": clearCookieHeader() },
+        });
       }
-      return Response.json(cart);
+      return Response.json(cart, {
+        headers: { "Set-Cookie": cartCookieHeader(cart.id) },
+      });
     }
 
     if (action === "update") {
       if (!cart) return Response.json(null);
       cart = await updateCartLine(cart.id, lineId, quantity);
-      return Response.json(cart);
+      return Response.json(cart, {
+        headers: { "Set-Cookie": cartCookieHeader(cart.id) },
+      });
     }
 
     return Response.json({ error: "Invalid action" }, { status: 400 });
