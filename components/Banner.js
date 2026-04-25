@@ -10,7 +10,7 @@ export default function Banner() {
   return (
     <div className="relative bg-black border-b border-white/10 px-6 py-3 flex items-center justify-center">
       <p className="text-xs tracking-widest uppercase text-accent text-center">
-        Free shipping on orders of 2 or more prints
+        Free shipping on all orders
       </p>
       <button
         onClick={() => setDismissed(true)}

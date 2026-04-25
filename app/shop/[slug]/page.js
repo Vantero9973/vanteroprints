@@ -102,7 +102,7 @@ export default async function ProductPage({ params }) {
                 Shipping
               </span>
               <p className="text-sm text-text-muted leading-loose">
-                Ships within 3–5 business days. Tracked and insured.
+                Ships within 1–3 business days. Tracked and insured.
               </p>
             </div>
           </div>
