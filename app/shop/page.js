@@ -4,8 +4,7 @@ import { getAllProducts, formatPrice } from "@/lib/shopify";
 
 export const metadata = {
   title: "Shop",
-  description:
-    "Original hand-pulled mokuhanga prints and giclée reproductions.",
+  description: "Original hand-pulled woodblock prints.",
 };
 
 export default async function ShopPage() {

@@ -16,9 +16,9 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <nav className="fixed dark:bg-black bg-white top-0 left-0 right-0 z-50">
       <Banner />
-      <div className="py-5 transition-all duration-300 bg-black border-b border-white/10">
+      <div className="py-5 transition-all duration-300 border-b dark:border-white/10 border-black/20">
         <div className="container mx-auto px-6 lg:px-16 h-full flex items-center justify-between">
           <Link href="/" className="flex items-baseline gap-2">
             <span className="font-display text-4xl text-text-primary tracking-wider">
@@ -94,7 +94,7 @@ export default function Nav() {
 
         {/* Mobile menu */}
         {open && (
-          <div className="md:hidden bg-ink border-t border-white/5 px-6 py-6 flex flex-col gap-5">
+          <div className="md:hidden border-t dark:border-white/5 border-black/10 px-6 py-6 flex flex-col gap-5">
             {links.map((l) => (
               <Link
                 key={l.href}

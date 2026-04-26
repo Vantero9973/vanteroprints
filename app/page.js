@@ -16,8 +16,6 @@ export default async function HomePage() {
 
   return (
     <section className="pt-[122px] flex items-start relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-3/5 h-full bg-gradient-radial from-accent/5 via-transparent to-transparent pointer-events-none" />
-
       <div className="max-w-site mx-auto px-6 lg:px-16 py-24 grid grid-cols-1 md:grid-cols-[1fr_320px] lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_420px] gap-12 lg:gap-20 items-center w-full">
         {/* Copy */}
         <div className="flex flex-col gap-6">
@@ -36,7 +34,7 @@ export default async function HomePage() {
           <div className="mt-8">
             <Link
               href="/shop"
-              className="border border-white/10 text-text-secondary text-base font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm hover:border-white/20 hover:text-text-primary transition-colors"
+              className="border border-black/50 dark:border-white/10 text-text-secondary text-base font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm dark:hover:border-white/20 hover:border-black hover:text-text-primary transition-colors"
             >
               View prints
             </Link>

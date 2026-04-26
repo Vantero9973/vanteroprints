@@ -26,7 +26,7 @@ export default function AddToCartSection({ variant }) {
       {!variant.availableForSale ? (
         <button
           disabled
-          className="w-full bg-ink-muted border border-white/5 text-text-muted text-xs font-medium tracking-widest uppercase py-4 rounded-sm cursor-not-allowed"
+          className="w-full bg-black border border-white/5 text-text-muted text-xs font-medium tracking-widest uppercase py-4 rounded-sm cursor-not-allowed"
         >
           Sold out
         </button>

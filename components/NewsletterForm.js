@@ -35,12 +35,12 @@ export default function NewsletterForm() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="your@email.com"
         required
-        className="flex-1 min-w-[180px] bg-ink-muted border border-white/5 text-text-primary text-sm px-4 py-2.5 rounded-sm outline-none focus:border-white/10 placeholder:text-text-muted transition-colors"
+        className="flex-1 min-w-[180px] dark:bg-black bg-white border border-white/5 text-text-primary text-sm px-4 py-2.5 rounded-sm outline-none focus:border-white/10 placeholder:text-text-muted transition-colors"
       />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="bg-accent text-ink text-xs font-medium tracking-widest uppercase px-5 py-2.5 rounded-sm hover:opacity-85 transition-opacity disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+        className="bg-accent text-black text-xs font-medium tracking-widest uppercase px-5 py-2.5 rounded-sm hover:opacity-85 transition-opacity disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
       >
         {status === "loading" ? "..." : "Join"}
       </button>

@@ -11,7 +11,7 @@ export default function CartButton() {
     <button
       onClick={() => setOpen(true)}
       aria-label="Open cart"
-      className="fixed bottom-6 right-6 z-40 bg-[#c0392b] text-ink flex items-center gap-2.5 px-4 py-3 rounded-sm shadow-lg hover:opacity-90 transition-opacity"
+      className="fixed bottom-6 right-6 z-40 bg-[#c0392b] text-white flex items-center gap-2.5 px-4 py-3 rounded-sm shadow-lg hover:opacity-90 transition-opacity"
     >
       <svg
         width="18"
@@ -25,10 +25,10 @@ export default function CartButton() {
         <line x1="3" y1="6" x2="21" y2="6" />
         <path d="M16 10a4 4 0 01-8 0" />
       </svg>
-      <span className="text-xs font-medium tracking-widest uppercase">
+      <span className="text-white text-sm font-normal tracking-widest uppercase">
         Cart
       </span>
-      <span className="bg-ink text-accent text-sm font-medium flex items-center justify-center">
+      <span className="text-white text-sm font-semibold flex items-center justify-center">
         {itemCount}
       </span>
     </button>

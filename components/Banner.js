@@ -8,7 +8,7 @@ export default function Banner() {
   if (dismissed) return null;
 
   return (
-    <div className="relative bg-black border-b border-white/10 px-6 py-3 flex items-center justify-center">
+    <div className="relative border-b dark:border-white/10 border-black/20 px-6 py-3 flex items-center justify-center">
       <p className="text-xs tracking-widest uppercase text-accent text-center">
         Free shipping on all orders
       </p>

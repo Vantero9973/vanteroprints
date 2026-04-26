@@ -17,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-ink text-text-primary font-body font-light min-h-screen container mx-auto">
+      <body className="text-text-primary font-body font-light min-h-screen container mx-auto">
         <CartProvider>
           <Navigation />
           <CartDrawer />
