@@ -75,17 +75,17 @@ export default function Nav() {
             aria-label="Toggle menu"
           >
             <span
-              className={`block w-6 h-px bg-[#ededed] transition-all duration-200 ${
+              className={`block w-6 h-px dark:bg-[#ededed] bg-black transition-all duration-200 ${
                 open ? "rotate-45 translate-y-[9px]" : ""
               }`}
             />
             <span
-              className={`block w-6 h-px bg-[#ededed] transition-opacity duration-200 ${
+              className={`block w-6 h-px dark:bg-[#ededed] bg-black transition-opacity duration-200 ${
                 open ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`block w-6 h-px bg-[#ededed] transition-all duration-200 ${
+              className={`block w-6 h-px dark:bg-[#ededed] bg-black transition-all duration-200 ${
                 open ? "-rotate-45 -translate-y-[9px]" : ""
               }`}
             />
@@ -94,7 +94,7 @@ export default function Nav() {
 
         {/* Mobile menu */}
         {open && (
-          <div className="md:hidden border-t dark:border-white/5 border-black/10 px-6 py-6 flex flex-col gap-5">
+          <div className="md:hidden px-6 py-6 flex flex-col gap-5">
             {links.map((l) => (
               <Link
                 key={l.href}
