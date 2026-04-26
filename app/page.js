@@ -34,7 +34,7 @@ export default async function HomePage() {
           <div className="mt-8">
             <Link
               href="/shop"
-              className="border border-black/50 dark:border-white/10 text-text-secondary text-base font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm dark:hover:border-white/20 hover:border-black hover:text-text-primary transition-colors"
+              className="border border-black/50 dark:border-white/50 text-text-secondary text-base font-medium tracking-widest uppercase px-8 py-3.5 rounded-sm dark:hover:border-white hover:border-black hover:text-text-primary transition-colors"
             >
               View prints
             </Link>
