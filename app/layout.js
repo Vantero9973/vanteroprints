@@ -7,7 +7,7 @@ import FloatingCartButton from "@/components/CartButton";
 
 export const metadata = {
   title: {
-    default: "vanteroprints - Hand-Carved Woodblock Prints",
+    default: "vanteroprints",
     template: "%s | vanteroprints",
   },
   description:
