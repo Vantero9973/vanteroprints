@@ -31,7 +31,7 @@ export default function CartDrawer() {
       <div className="fixed top-0 right-0 h-full w-full max-w-md dark:bg-black bg-white border-l border-white/5 z-50 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
-          <span className="font-display text-lg">
+          <span className="font-display text-lg flex items-center gap-1.5">
             Cart{" "}
             {itemCount > 0 && (
               <span className="text-text-muted text-sm">({itemCount})</span>
@@ -39,7 +39,7 @@ export default function CartDrawer() {
           </span>
           <button
             onClick={() => setOpen(false)}
-            className="text-text-muted hover:text-text-primary transition-colors text-xl"
+            className="text-text-muted hover:text-text-primary transition-colors text-2xl cursor-pointer"
             aria-label="Close cart"
           >
             ×
@@ -71,15 +71,15 @@ export default function CartDrawer() {
                     </div>
 
                     <div className="flex flex-col gap-1 flex-1">
-                      <span className="font-display text-sm text-text-primary">
+                      <span className="font-display text-base text-text-primary">
                         {product.title}
                       </span>
                       {variant.title !== "Default Title" && (
-                        <span className="text-xs text-text-muted">
+                        <span className="text-sm text-text-muted">
                           {variant.title}
                         </span>
                       )}
-                      <span className="text-sm text-accent mt-1">
+                      <span className="text-base text-accent mt-1">
                         {formatPrice(
                           variant.price.amount,
                           variant.price.currencyCode
@@ -93,11 +93,11 @@ export default function CartDrawer() {
                             updateQuantity(line.id, line.quantity - 1)
                           }
                           disabled={loading}
-                          className="w-6 h-6 border border-white/10 text-text-muted hover:text-text-primary hover:border-white/20 transition-colors rounded-sm flex items-center justify-center text-sm disabled:opacity-50"
+                          className="w-6 h-6 border border-white/10 text-text-muted hover:text-text-primary hover:border-white/20 transition-colors rounded-sm flex items-center justify-center text-base disabled:opacity-50"
                         >
                           −
                         </button>
-                        <span className="text-sm text-text-primary w-4 text-center">
+                        <span className="text-base text-text-primary w-4 text-center">
                           {line.quantity}
                         </span>
                         <button
@@ -105,7 +105,7 @@ export default function CartDrawer() {
                             updateQuantity(line.id, line.quantity + 1)
                           }
                           disabled={loading}
-                          className="w-6 h-6 border border-white/10 text-text-muted hover:text-text-primary hover:border-white/20 transition-colors rounded-sm flex items-center justify-center text-sm disabled:opacity-50"
+                          className="w-6 h-6 border border-white/10 text-text-muted hover:text-text-primary hover:border-white/20 transition-colors rounded-sm flex items-center justify-center text-base disabled:opacity-50"
                         >
                           +
                         </button>
@@ -115,7 +115,7 @@ export default function CartDrawer() {
                     <button
                       onClick={() => removeFromCart(line.id)}
                       disabled={loading}
-                      className="text-text-muted hover:text-text-primary transition-colors text-sm self-start mt-0.5 disabled:opacity-50"
+                      className="text-text-muted hover:text-text-primary transition-colors text-xl self-start disabled:opacity-50 cursor-pointer"
                       aria-label="Remove item"
                     >
                       ×

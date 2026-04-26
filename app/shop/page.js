@@ -65,7 +65,7 @@ export default async function ShopPage() {
                       </div>
                     )}
                   </div>
-                  <div className="flex justify-between items-baseline py-5 border-t border-white/5">
+                  <div className="flex justify-between items-baseline py-5 dark:bg-black bg-white border-t border-white/5">
                     <span className="font-display text-base text-text-primary">
                       {product.title}
                     </span>

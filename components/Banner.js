@@ -14,7 +14,7 @@ export default function Banner() {
       </p>
       <button
         onClick={() => setDismissed(true)}
-        className="absolute right-4 text-accent/50 hover:text-accent transition-colors text-lg leading-none"
+        className="absolute right-4 text-accent/50 hover:text-accent transition-colors text-xl leading-none cursor-pointer"
         aria-label="Dismiss"
       >
         ×
