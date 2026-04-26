@@ -7,11 +7,11 @@ import FloatingCartButton from "@/components/CartButton";
 
 export const metadata = {
   title: {
-    default: "Vantero Prints — Mokuhanga Woodblock Prints",
-    template: "%s | Vantero Prints",
+    default: "vanteroprints - Hand-Carved Woodblock Prints",
+    template: "%s | vanteroprints",
   },
   description:
-    "Hand-carved, hand-pulled Japanese woodblock prints by Vantero. Original mokuhanga and giclée reproductions.",
+    "Original hand-carved woodblock prints and mokuhanga art by vanteroprints.",
 };
 
 export default function RootLayout({ children }) {
