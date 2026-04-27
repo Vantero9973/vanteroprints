@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import { CartProvider } from "@/context/CartContext";
 import FloatingCartButton from "@/components/CartButton";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
           <main>{children}</main>
           <Footer />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
