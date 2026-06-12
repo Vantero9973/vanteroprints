@@ -26,17 +26,9 @@ export default function Footer() {
 
         <div className="flex flex-wrap items-center justify-between gap-4">
           {/* <div className="flex flex-wrap items-center justify-between gap-4 pt-8"> */}
-          <div className="flex gap-6">
-            {["/shop", "/contact"].map((href) => (
-              <Link
-                key={href}
-                href={href}
-                className="text-xs tracking-widest uppercase text-text-muted hover:text-text-primary transition-colors"
-              >
-                {href.replace("/", "")}
-              </Link>
-            ))}
-          </div>
+          <p className="text-xs tracking-widest text-text-muted hover:text-text-primary transition-colors">
+            © {new Date().getFullYear()} vanteroprints
+          </p>
           <div className="flex gap-6">
             {socials.map((s) => (
               <a
@@ -51,9 +43,17 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <p className="text-xs tracking-widest text-text-muted hover:text-text-primary transition-colors">
-            © {new Date().getFullYear()} vanteroprints
-          </p>
+          <div className="flex gap-6">
+            {["/contact"].map((href) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-xs tracking-widest uppercase text-text-muted hover:text-text-primary transition-colors"
+              >
+                {href.replace("/", "")}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

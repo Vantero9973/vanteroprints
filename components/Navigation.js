@@ -6,10 +6,7 @@ import { useState } from "react";
 import Banner from "@/components/Banner";
 import socials from "@/public/icon/socials";
 
-const links = [
-  { href: "/shop", label: "Shop" },
-  { href: "/contact", label: "Contact" },
-];
+const links = [{ href: "/contact", label: "Contact" }];
 
 export default function Nav() {
   const pathname = usePathname();
