@@ -97,14 +97,14 @@ export default async function ProductPage({ params }) {
             />
 
             {/* Shipping info */}
-            <div className="flex flex-col gap-2 pt-4 border-t border-white/5">
+            {/* <div className="flex flex-col gap-2 pt-4 border-t border-white/5">
               <span className="text-xs font-medium tracking-widest uppercase text-accent">
                 Shipping
               </span>
               <p className="text-sm text-text-muted leading-loose">
                 Ships within 1–3 business days. Tracked and insured.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
